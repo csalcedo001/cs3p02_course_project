@@ -1,2 +1,3 @@
-# cs3p02_course_project
-CS3P02 - Cloud Computing: Course final project
+# CS3P01 - Cloud Computing: Course Final Project
+
+Machine Learning (ML) related project on the cloud.
