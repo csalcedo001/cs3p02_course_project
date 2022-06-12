@@ -13,3 +13,5 @@ Se planea usar los contenedores de [KubeFlow en Docker Hub](https://hub.docker.c
 2. El usuario podra realizar un request al servidor en el que pase el input para la red neuronal.
 3. El servicio sera distribuido entre los contenedores que manejen el modelo para que procesen el input del usuario.
 4. El output del modelo sera devuelto al usuario.
+
+El servicio de KubeFlow ya esta activo en un servidor remoto de Amazon Web Services (AWS): https://2dfc-3-17-73-149.ngrok.io/#/pipelines.
