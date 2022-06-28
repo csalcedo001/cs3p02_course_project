@@ -1,17 +1,47 @@
-# CS3P01 - Cloud Computing: Proyecto Final del Curso
+# CS3P01 - Cloud Computing: Final Course Project
 
-El proyecto consiste en un servicio que permita
+## Project Description
 
-- Enviar y almacenar modelos de redes neuronales en la nube.
-- Llamar a los modelos de forma remota para observar un resultado.
-- Correr los modelos directamente en la nube.
-- Descargar modelos de la nube.
+The project consists in developing a complete and functional Kubeflow pipeline for a real research project in Machine Learning. This project should consider:
 
-Se planea usar los contenedores de [KubeFlow en Docker Hub](https://hub.docker.com/u/kubeflow) como base. En detalle:
+- Data generation / retrieval.
+- Training of multiple models.
+- Compare models on the test phase with plots.
+- Hyperparameter tuning with Katib.
 
-1. Los contenedores con redes entrenadas seran deployados a un servidor.
-2. El usuario podra realizar un request al servidor en el que pase el input para la red neuronal.
-3. El servicio sera distribuido entre los contenedores que manejen el modelo para que procesen el input del usuario.
-4. El output del modelo sera devuelto al usuario.
+In detail, the project considers the classification task for the XOR problem. In this task, points are drawn uniformly at random in the range [0, 1] in a 2D plane (although an implementation can be extended to n dimensions). Each point has a label corresponding to the XOR operator of the rounded values of the point's coordinates in the plane (check the image from scatter plots for a reference). The idea is to obtain a model that can correctly classify each sample point as belonging to each quadrant of the XOR operator.
 
-El servicio de KubeFlow ya esta activo en un servidor remoto de Amazon Web Services (AWS): https://2dfc-3-17-73-149.ngrok.io/#/pipelines.
+Theoretically, a linear model should not be able to learn a set of parameters that solves the XOR problem because points are spread in a way that makes it impossible for a single line to divide appropriately. In contrast, a non-linear model with higher capacity (such as a neural network with hidden layers) should be able to correctly classify points for the XOR problem with almost perfect accuracy. In this project we use Kubeflow as the framework in which this whole research process takes place.
+
+## Project Status
+
+_Note_: The current image of the project can be found at [Docker Hub](https://hub.docker.com/r/cesarsalcedo/cs3p02_kubeflow_project/tags).
+
+### Done
+
+- Docker image with saved state of the current version of the project.
+- Pipeline that successfully loads data and saves sample scatter plots.
+- Manual parameter manipulation with Kubeflow's Central Dashboard.
+
+#### Pipeline
+
+The current pipeline produces the following graph:
+
+![](data/pipeline.png)
+
+#### Scatter Plots
+
+_Training (100 samples):_
+
+![](data/sample_scatter_train.png)
+
+
+_Testing (10 samples):_
+
+![](data/sample_scatter_test.png)
+
+### Pending
+
+- Train neural network models.
+- Compare models in terms of loss and accuracy plots.
+- Automate hyperparameter tunning via Katib
