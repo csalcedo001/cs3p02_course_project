@@ -1,0 +1,20 @@
+name: Sample Scatter Plot
+description: Creates an scatter plot from xor data
+
+inputs:
+- {name: Input Dir, type: Data, description: 'Input data path'}
+
+outputs:
+- {name: Output Dir, type: Data, description: 'Output data path'}
+
+implementation:
+    container:
+        image: cesarsalcedo/cs3p02_kubeflow_project:latest
+        command: [
+            python3,
+            /pipelines/component/src/sample_scatter.py,
+            --input,
+            {inputPath: Input Dir},
+            --output,
+            {outputPath: Output Dir},
+        ]

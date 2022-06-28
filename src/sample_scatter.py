@@ -1,26 +1,37 @@
 import argparse
 from pathlib import Path
 import json
+import os
 
+import numpy as np
 import matplotlib.pyplot as plt
 
 
 # Define parser
 parser = argparse.ArgumentParser()
 
-parser.add_argument('--in', type=str, required=True)
-parser.add_argument('--out', type=str, required=True)
-parser.add_argument('--train_size', type=int, default=1000)
-parser.add_argument('--test_size', type=int, default=100)
-parser.add_argument('--batch_size', type=int, default=32)
-parser.add_argument('--dims', type=int, default=2)
+parser.add_argument('--input', type=str, required=True)
+parser.add_argument('--output', type=str, required=True)
 
-xor_sampler = XORSampler(
-    batch_size=100)
 
-x, y = xor_sampler.sample()
+# Parse arguments
+args = parser.parse_args()
 
-fig = plt.figure()
-plt.scatter(x[:,0], x[:,1], c=y)
-plt.savefig('sample_scatter.png')
-plt.close(fig)
+# Make sure path exists
+Path(args.output).mkdir(parents=True, exist_ok=True)
+
+with open(args.input) as in_file:
+    data = json.load(in_file)
+
+title = ['train', 'test']
+for i, (x, y) in enumerate(data):
+    x = np.array(x)
+    y = np.array(y)
+    
+    filename = 'sample_scatter_{}.png'.format(title[i])
+    filepath = os.path.join(args.output, filename)
+
+    fig = plt.figure()
+    plt.scatter(x[:,0], x[:,1], c=y)
+    plt.savefig(filepath)
+    plt.close(fig)

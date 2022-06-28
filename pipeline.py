@@ -6,11 +6,17 @@ import kfp.components as comp
 def simple_pipeline(
         min:int=0,
         max:int=100,
-        num:int=5
+        num:int=5,
+        train_size:int=100,
+        test_size:int=10,
+        dims:int=2
     ):
 
     xor_sampler = comp.load_component_from_file('components/xor_sampler.yaml')
-    op_xor_sampler = xor_sampler(dims=2, train_size=1, test_size=1)
+    op_xor_sampler = xor_sampler(dims=dims, train_size=train_size, test_size=test_size)
+
+    sample_scatter = comp.load_component_from_file('components/sample_scatter.yaml')
+    op_sample_scatter = sample_scatter(input_dir = op_xor_sampler.output)
 
     generate_data = comp.load_component_from_file('components/generator.yaml')
     op_gen = generate_data(min=min, max=max, num=num)
