@@ -27,15 +27,16 @@ def simple_pipeline(
     train_outs = []
     with dsl.ParallelFor(models) as model:
         op_train = train_comp(
+            input_dir=op_xor_sampler.output,
             model=model,
             dims=dims,
             size_hidden=size_hidden,
             num_hidden=num_hidden,
-            epoch=epochs)
+            epochs=epochs)
         
         train_outs.append(op_train.output)
     
-    
+
 
 if __name__ == '__main__':
     kfp.compiler.Compiler().compile(simple_pipeline, __file__ + '.yaml')

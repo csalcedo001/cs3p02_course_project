@@ -1,5 +1,5 @@
 from python:3.7
-RUN pip install --upgrade pip
-RUN pip install numpy matplotlib
-RUN pip install torch torchvision torchaudio
+RUN pip3 install --upgrade pip
+RUN pip3 install numpy matplotlib
+RUN pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cpu
 COPY ./src /pipelines/component/src
