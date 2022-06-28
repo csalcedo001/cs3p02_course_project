@@ -5,7 +5,7 @@ import kfp.components as comp
 @dsl.pipeline(name='ejemplo-simple')
 def simple_pipeline():
     generate_data = comp.load_component_from_file('component.yaml')
-    op_gen = generate_data()
+    op_gen = generate_data(min=100, max=200, num=10)
 
     with dsl.ParallelFor(op_gen.output) as e:
         dsl.ContainerOp(
