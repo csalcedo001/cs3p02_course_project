@@ -1,0 +1,35 @@
+name: Train
+description: Trains a model for the XOR problem
+
+inputs:
+- {name: Input Dir, type: Data, description: 'Input data path'}
+- {name: Dims, type: Integer, description: 'Number of dimensions of dataset'}
+- {name: Model, type: String, description: 'Model name'}
+- {name: Size Hidden, type: Integer, description: 'Size of each hidden layer'}
+- {name: Num Hidden, type: Integer, description: 'Number of hidden layers'}
+- {name: Epochs, type: Integer, description: 'Training epochs'}
+
+outputs:
+- {name: Output Dir, type: Data, description: 'Output data path'}
+
+implementation:
+    container:
+        image: cesarsalcedo/cs3p02_kubeflow_project:latest
+        command: [
+            python3,
+            /pipelines/component/src/train.py,
+            --input,
+            {inputPath: Input Dir},
+            --output,
+            {outputPath: Output Dir},
+            --dims,
+            {intputValue: Dims},
+            --model,
+            {intputValue: Model},
+            --size_hidden,
+            {intputValue: Size Hidden},
+            --num_hidden,
+            {intputValue: Num Hidden},
+            --epochs,
+            {intputValue: Epochs},
+        ]

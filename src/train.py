@@ -19,8 +19,8 @@ from model import SimpleNet
 # Define parser
 parser = argparse.ArgumentParser()
 
-parser.add_argument('--input_data', type=str, required=True)
-parser.add_argument('--output_dir', type=str, required=True)
+parser.add_argument('--input', type=str, required=True)
+parser.add_argument('--output', type=str, required=True)
 parser.add_argument('--dims', type=int, default=1000)
 parser.add_argument('--model', type=str, default='simplenet')
 parser.add_argument('--size_hidden', type=int, default=16)
@@ -34,7 +34,7 @@ args = parser.parse_args()
 ### Data
 
 # Get training data
-with open(args.input_data, 'r') as in_file:
+with open(args.input, 'r') as in_file:
     data = json.load(in_file)
 
 (x_train, y_train), (_, _) = data
@@ -90,3 +90,25 @@ for epoch in tqdm(range(args.epochs)):
     # Compute accuracy
     acc = torch.sum(torch.round(y_hat) == y_train)
     accuracy.append(acc)
+
+
+
+### Results
+
+# Make dir
+savedir = args.output
+Path(savedir).parent.mkdir(parents=True, exist_ok=True)
+
+# Save model
+model_path = os.path.join(savedir, 'model.pt')
+torch.save(model.state_dict(model_path))
+
+# Save losses
+losses_path = os.path.join(savedir, 'losses.pkl')
+with open(losses_path, 'wb') as out_dir:
+    pickle.dump(losses, out_dir)
+
+# Save accuracy
+accuracy_path = os.path.join(savedir, 'accuracy.pkl')
+with open(accuracy_path, 'wb') as out_dir:
+    pickle.dump(accuracy, out_dir)
