@@ -11,7 +11,7 @@ outputs:
 
 implementation:
     container:
-        image: cesarsalcedo/cs3p02_kubeflow_project@sha256:e403b311744756f1b4395053a24019f014a31298c3504742092b62c51945fb45
+        image: cesarsalcedo/cs3p02_kubeflow_project@sha256:970a9825c39bdafd82847ac64f405e931f3136af6adccdf7960ff6033162d865
         command: [
             python3,
             /pipelines/component/src/generator.py,

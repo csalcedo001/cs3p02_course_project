@@ -3,8 +3,16 @@ from kfp import dsl
 import kfp.components as comp
 
 @dsl.pipeline(name='ejemplo-simple')
-def simple_pipeline(min=0, max=100, num=5):
-    generate_data = comp.load_component_from_file('component.yaml')
+def simple_pipeline(
+        min:int=0,
+        max:int=100,
+        num:int=5
+    ):
+
+    xor_sampler = comp.load_component_from_file('components/xor_sampler.yaml')
+    op_xor_sampler = xor_sampler(dims=2, train_size=1, test_size=1)
+
+    generate_data = comp.load_component_from_file('components/generator.yaml')
     op_gen = generate_data(min=min, max=max, num=num)
 
     with dsl.ParallelFor(op_gen.output) as e:

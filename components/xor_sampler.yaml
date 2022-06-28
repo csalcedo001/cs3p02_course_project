@@ -1,0 +1,26 @@
+name: XOR Sampler
+description: Generates data for XOR problem.
+
+inputs:
+- {name: Dims, type: Integer, description: 'Number of dimensions of dataset'}
+- {name: Train Size, type: Integer, description: 'Number of batches in training set'}
+- {name: Test Size, type: Integer, description: 'Number of batches in test set'}
+
+outputs:
+- {name: Output 1, type: Data, description: 'Output 1 data path'}
+
+implementation:
+    container:
+        image: cesarsalcedo/cs3p02_kubeflow_project@sha256:970a9825c39bdafd82847ac64f405e931f3136af6adccdf7960ff6033162d865
+        command: [
+            python3,
+            /pipelines/component/src/xor_sampler.py,
+            --out,
+            {outputPath: Output 1},
+            --dims,
+            {inputValue: Dims},
+            --train_size,
+            {inputValue: Train Size},
+            --test_size,
+            {inputValue: Test Size},
+        ]
