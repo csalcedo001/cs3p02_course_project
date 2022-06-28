@@ -1,0 +1,15 @@
+name: Generator
+description: Generates data for test flow.
+
+outputs:
+- {name: Output 1, type: Data, description: 'Output 1 data path'}
+
+implementation:
+    container:
+        image: cesarsalcedo/cs3p02_kubeflow_project@sha256:cb581242061ec9f29cdb8705864267cedf7646f146f6d11dba5d2990ec7b6c33
+        command: [
+            python3,
+            /pipelines/component/src/generator.py,
+            --out,
+            {outputPath: Output 1},
+        ]
