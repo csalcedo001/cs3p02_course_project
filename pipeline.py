@@ -1,20 +1,11 @@
 import kfp
 from kfp import dsl
+import kfp.components as comp
 
 @dsl.pipeline(name='ejemplo-simple')
 def simple_pipeline():
-    op_gen = dsl.ContainerOp(
-        name='generador',
-        image='python:alpine3.7',
-        command=[
-            'python',
-            '-c'
-        ],
-        arguments=[
-            "import random; import json; json.dump([random.randint(0, 100) for _ in range(5)], open('/tmp/out.json', 'w'))"
-        ],
-        file_outputs={'out': '/tmp/out.json'},
-    )
+    generate_data = comp.load_component_from_file('component.yaml')
+    op_gen = generate_data()
 
     with dsl.ParallelFor(op_gen.output) as e:
         dsl.ContainerOp(
