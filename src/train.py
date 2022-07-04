@@ -97,11 +97,11 @@ for epoch in tqdm(range(args.epochs)):
 
 # Make dir
 savedir = args.output
-Path(savedir).parent.mkdir(parents=True, exist_ok=True)
+Path(savedir).mkdir(parents=True, exist_ok=True)
 
 # Save model
 model_path = os.path.join(savedir, 'model.pt')
-torch.save(model.state_dict(model_path))
+torch.save(model.state_dict(), model_path)
 
 # Save losses
 losses_path = os.path.join(savedir, 'losses.pkl')
