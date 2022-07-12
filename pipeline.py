@@ -4,12 +4,12 @@ import kfp.components as comp
 
 @dsl.pipeline(name='xor-training')
 def simple_pipeline(
-        train_size:int=100,
-        test_size:int=10,
+        train_size:int=10000,
+        test_size:int=1000,
         dims:int=2,
         size_hidden:int=16,
-        num_hidden:int=1,
-        epochs:int=5,
+        # num_hidden:int=1,
+        epochs:int=1000,
     ):
 
     # Load components
@@ -24,15 +24,28 @@ def simple_pipeline(
     with dsl.Condition(dims == 2):
         op_sample_scatter = sample_scatter_comp(input_dir=op_xor_sampler.output)
 
-    op_train = train_comp(
+    op_train_0 = train_comp(
         input_dir=op_xor_sampler.output,
         model='simplenet',
         dims=dims,
         size_hidden=size_hidden,
-        num_hidden=num_hidden,
+        num_hidden=0,
+        epochs=epochs)
+
+    op_train_1 = train_comp(
+        input_dir=op_xor_sampler.output,
+        model='simplenet',
+        dims=dims,
+        size_hidden=size_hidden,
+        num_hidden=1,
         epochs=epochs)
     
-    training_plots_comp(model_dir=op_train.output, model_name='simplenet')
+    training_plots_comp(
+        model_dir_0=op_train_0.output,
+        model_name_0='0 hidden layers',
+        model_dir_1=op_train_1.output,
+        model_name_1='1 hidden layers',
+    )
 
 
 if __name__ == '__main__':

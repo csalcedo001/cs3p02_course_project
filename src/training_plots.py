@@ -12,16 +12,18 @@ import pickle
 # Define parser
 parser = argparse.ArgumentParser()
 
-parser.add_argument('--model-dir', type=str, required=True)
-parser.add_argument('--model-name', type=str, required=True)
+parser.add_argument('--model-dir0', type=str, required=True)
+parser.add_argument('--model-dir1', type=str, required=True)
+parser.add_argument('--model-name0', type=str, required=True)
+parser.add_argument('--model-name1', type=str, required=True)
 parser.add_argument('--output', type=str, required=True)
 
 args = parser.parse_args()
 
 
 # Get arguments
-model_dirs = [args.model_dir]
-model_names = [args.model_name]
+model_dirs = [args.model_dir0, args.model_dir1]
+model_names = [args.model_name0, args.model_name1]
 
 model_losses = {}
 model_accuracy = {}

@@ -14,7 +14,7 @@ outputs:
 
 implementation:
     container:
-        image: cesarsalcedo/cs3p02_kubeflow_project@sha256:f1c3c61e2669555cf4dd882b477d7e3f0a7b6547ac7bedcdfafa7f837bb6f4cc
+        image: cesarsalcedo/cs3p02_kubeflow_project@sha256:efa221e4916712f1b32d434697bb8ae6a1d22859ef1c4b0b61aa8e38eac80291
         command: [
             python3,
             /pipelines/component/src/train.py,
