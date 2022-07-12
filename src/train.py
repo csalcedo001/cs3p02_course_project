@@ -8,7 +8,6 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 from tqdm import tqdm
-import matplotlib.pyplot as plt
 
 from model import SimpleNet
 
@@ -89,7 +88,7 @@ for epoch in tqdm(range(args.epochs)):
 
     # Compute accuracy
     acc = torch.sum(torch.round(y_hat) == y_train)
-    accuracy.append(acc)
+    accuracy.append(acc.item())
 
 
 

@@ -1,0 +1,23 @@
+name: Training Plots
+description: Creates plots for data generated during the training process
+
+inputs:
+- {name: Model Dir, type: Data, description: 'Directory where training data is saved for model'}
+- {name: Model Name, type: String, description: 'Name for model'}
+
+outputs:
+- {name: Output Dir, type: Data, description: 'Output data path'}
+
+implementation:
+    container:
+        image: cesarsalcedo/cs3p02_kubeflow_project@sha256:f1c3c61e2669555cf4dd882b477d7e3f0a7b6547ac7bedcdfafa7f837bb6f4cc
+        command: [
+            python3,
+            /pipelines/component/src/training_plots.py,
+            --model-dir,
+            {inputPath: Model Dir},
+            --model-name,
+            {inputValue: Model Name},
+            --output,
+            {outputPath: Output Dir},
+        ]
