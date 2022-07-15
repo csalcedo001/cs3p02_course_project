@@ -105,10 +105,10 @@ Kubeflow is designed to be used by multiple users simultaneously as a service in
 It was possible to test the execution of the program with different workloads by updating parameters directly from the Kubeflow Central Dashboard. For example, we could test across runs with a varying number of epochs, which resulted in the following graphs:
 
 - Training accuracy for 1000 epochs
-![](data/training_accuracy_1000.png)
+![](data/training_acc_1000.png)
 
 - Training accuracy for 10000 epochs
-![](data/training_accuracy_10000.png)
+![](data/training_acc_10000.png)
 
 
 ### Analisis from metrics
