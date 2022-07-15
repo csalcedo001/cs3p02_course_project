@@ -1,5 +1,7 @@
 # CS3P01 - Cloud Computing: Final Course Project
 
+_Note_: This project was developed as the simple use case of Kubeflow usage. The ellaborate use case project can be found in the following GitHub repository: https://github.com/GioCS17/proyecto_cloud
+
 ## Project Description
 
 The project consists in developing a complete and functional Kubeflow pipeline for a real research project in Machine Learning. This project should consider:
@@ -80,8 +82,6 @@ Runs were executed successfully using Kubeflow Central Bashboard. Kubeflow makes
 
 ## Project deliverables
 
-This project was developed as the simple use case of Kubeflow usage. The ellaborate use case project can be found in the following GitHub repository: https://github.com/GioCS17/proyecto_cloud
-
 ### Kubernetes deployment
 
 Kubeflow, by definition (and by its name), is tightly related to Kubernetes. This is the case because Kubeflow works under the assumption that the Machine Learning workflow can be separated into multiple processes that meet some specific functionality (e.g. data preparation, training, testing). For this reason, the set of functional components can be encapsulated as containers, which can be run given some parameters to produce outputs that can be used later for other components. The fact that these components are containerized functions leads to the notion of a graph of computation, namely the Kubeflow Pipelines graph for this use case, which describes the flow of information along a complete run of a Kubeflow experiment. On each run, components are instantiated and run with the input parameters received from the user and other containers. As we are working with Kubernetes, the execution of components is independent from other components, and can have different sets of installed packages without inherent compatibility issues.
@@ -98,9 +98,15 @@ In a similar way, Kubeflow has a monitoring system that automatically updates th
 
 ### Aditional topic: multi-tenancy
 
+
+
 ### Monitoring metrics
 
+
+
 ### Analisis from metrics
+
+
 
 
 ## Future work
