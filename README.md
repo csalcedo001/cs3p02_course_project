@@ -98,15 +98,22 @@ In a similar way, Kubeflow has a monitoring system that automatically updates th
 
 ### Aditional topic: multi-tenancy
 
-
+Kubeflow is designed to be used by multiple users simultaneously as a service in the cloud. This is done by assigning a namespace for each user. A namespace holds all the resources a user needs, and isolates the execution of experiments from other users. This is specially useful to prevent overwriting results while meking it possible to execute all the normal operations of Kubeflow simulaneously along other users.
 
 ### Monitoring metrics
 
+It was possible to test the execution of the program with different workloads by updating parameters directly from the Kubeflow Central Dashboard. For example, we could test across runs with a varying number of epochs, which resulted in the following graphs:
+
+- Training accuracy for 1000 epochs
+![](data/training_accuracy_1000.png)
+
+- Training accuracy for 10000 epochs
+![](data/training_accuracy_10000.png)
 
 
 ### Analisis from metrics
 
-
+The metrics plot show that 10000 epochs do not result in any observable improve in performance in the model compared to 1000 epochs, since accuracy converges to 1 right after 500 epochs.
 
 
 ## Future work
