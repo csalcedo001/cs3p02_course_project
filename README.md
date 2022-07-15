@@ -1,5 +1,7 @@
 # CS3P01 - Cloud Computing: Final Course Project
 
+_Note_: This project was developed as the simple use case of Kubeflow usage. The ellaborate use case project can be found in the following GitHub repository: https://github.com/GioCS17/proyecto_cloud
+
 ## Project Description
 
 The project consists in developing a complete and functional Kubeflow pipeline for a real research project in Machine Learning. This project should consider:
@@ -76,6 +78,35 @@ The pipeline for this machine learning workflow is described by the script in `p
 Runs were executed successfully using Kubeflow Central Bashboard. Kubeflow makes experiment configuration and launching easy by providing an interface to the pipeline parameters. By using this interface, it was possible to set the configuration for the experiments (setting the number of samples for the training and test set, the number of dimensions of the dataset, and the number of training epochs). A successful run produces the following execution graph:
 
 ![](data/run.png)
+
+
+## Project deliverables
+
+### Kubernetes deployment
+
+Kubeflow, by definition (and by its name), is tightly related to Kubernetes. This is the case because Kubeflow works under the assumption that the Machine Learning workflow can be separated into multiple processes that meet some specific functionality (e.g. data preparation, training, testing). For this reason, the set of functional components can be encapsulated as containers, which can be run given some parameters to produce outputs that can be used later for other components. The fact that these components are containerized functions leads to the notion of a graph of computation, namely the Kubeflow Pipelines graph for this use case, which describes the flow of information along a complete run of a Kubeflow experiment. On each run, components are instantiated and run with the input parameters received from the user and other containers. As we are working with Kubernetes, the execution of components is independent from other components, and can have different sets of installed packages without inherent compatibility issues.
+
+### Storage
+
+Data from Kubeflow is automatically stored in the computer after the execution of each component. This is both useful and necessary for components to be able to share information with one another. Whenever a component is expected to deliver its output as the input of another component, data is copied from the source component to the target component. This data is kept in Kubeflow throughout the whole run, even after the run has finished its execution. One can access the data from all past runs directly from Kubeflow Central Dashboard.
+
+### Scalability and Monitoring
+
+Kubeflow is designed to meet scalability requirements. Scalability is essential for Machine Learning projects, since the workflow data scientists usually use consists of first performing some experiments in their personal computer and then scaling to a computer cluster. Kubeflow accounts for this condition by distributing ML tasks across user-available computing resources (e.g. CPUs, GPUs, nodes) without the need of updating the code.
+
+In a similar way, Kubeflow has a monitoring system that automatically updates the information about the cluster in the Kubeflow Central Dashboard. In particular, the home screen shows a summary about the user's resources and experiments, while other tabs further speciallize in each of the fields they refer to. For example, the Runs tab shows all relevant information about runs, providing the run configuration (input parameters), status (pending, running, successful, or fail), and results (including logs, plots, and captions). All this information is updated at a regular basis for the user to get the most recent status of his experiments.
+
+### Aditional topic: multi-tenancy
+
+
+
+### Monitoring metrics
+
+
+
+### Analisis from metrics
+
+
 
 
 ## Future work
